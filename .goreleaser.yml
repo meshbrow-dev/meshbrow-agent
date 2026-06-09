@@ -1,0 +1,71 @@
+version: 2
+
+project_name: meshbrow-agent
+
+before:
+  hooks:
+    - go mod tidy
+    - go test ./...
+
+builds:
+  - main: ./cmd/agent
+    binary: meshbrow-agent
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - darwin
+    goarch:
+      - amd64
+      - arm64
+    ldflags:
+      - -s -w
+      - -X main.Version={{.Version}}
+      - -X main.Commit={{.Commit}}
+      - -X main.Date={{.Date}}
+
+archives:
+  - format: tar.gz
+    name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+
+dockers:
+  - image_templates:
+      - "ghcr.io/meshbrow-dev/meshbrow-agent:{{ .Version }}-amd64"
+    dockerfile: Dockerfile.goreleaser
+    use: buildx
+    build_flag_templates:
+      - "--platform=linux/amd64"
+    goarch: amd64
+  - image_templates:
+      - "ghcr.io/meshbrow-dev/meshbrow-agent:{{ .Version }}-arm64"
+    dockerfile: Dockerfile.goreleaser
+    use: buildx
+    build_flag_templates:
+      - "--platform=linux/arm64"
+    goarch: arm64
+
+docker_manifests:
+  - name_template: "ghcr.io/meshbrow-dev/meshbrow-agent:{{ .Version }}"
+    image_templates:
+      - "ghcr.io/meshbrow-dev/meshbrow-agent:{{ .Version }}-amd64"
+      - "ghcr.io/meshbrow-dev/meshbrow-agent:{{ .Version }}-arm64"
+  - name_template: "ghcr.io/meshbrow-dev/meshbrow-agent:latest"
+    image_templates:
+      - "ghcr.io/meshbrow-dev/meshbrow-agent:{{ .Version }}-amd64"
+      - "ghcr.io/meshbrow-dev/meshbrow-agent:{{ .Version }}-arm64"
+
+checksum:
+  name_template: "checksums.txt"
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"
+      - "^chore:"
+
+release:
+  github:
+    owner: meshbrow-dev
+    name: meshbrow-agent

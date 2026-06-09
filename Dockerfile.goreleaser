@@ -1,0 +1,4 @@
+FROM alpine:3.20
+RUN apk add --no-cache ca-certificates
+COPY meshbrow-agent /usr/local/bin/meshbrow-agent
+ENTRYPOINT ["meshbrow-agent"]
