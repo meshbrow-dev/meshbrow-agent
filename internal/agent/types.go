@@ -4,11 +4,11 @@ import "time"
 
 // Message is sent from agent to host.
 type Message struct {
-	Type      string                 `json:"type"`
-	SessionID string                 `json:"session_id"`
-	Payload   interface{}            `json:"payload,omitempty"`
-	RequestID string                 `json:"request_id,omitempty"`
-	Timestamp time.Time              `json:"timestamp"`
+	Type      string      `json:"type"`
+	SessionID string      `json:"session_id"`
+	Payload   interface{} `json:"payload,omitempty"`
+	RequestID string      `json:"request_id,omitempty"`
+	Timestamp time.Time   `json:"timestamp"`
 }
 
 // Command is received from host.
@@ -31,14 +31,14 @@ type HealthStatus struct {
 // Metrics represents collected system metrics.
 type Metrics struct {
 	CPUPercent    float64 `json:"cpu_percent"`
-	MemoryUsedMB float64 `json:"memory_used_mb"`
+	MemoryUsedMB  float64 `json:"memory_used_mb"`
 	MemoryTotalMB float64 `json:"memory_total_mb"`
-	DiskUsedMB   float64 `json:"disk_used_mb"`
-	DiskTotalMB  float64 `json:"disk_total_mb"`
-	NetworkRxMB  float64 `json:"network_rx_mb"`
-	NetworkTxMB  float64 `json:"network_tx_mb"`
-	OpenFiles    int     `json:"open_files"`
-	Goroutines   int     `json:"goroutines"`
+	DiskUsedMB    float64 `json:"disk_used_mb"`
+	DiskTotalMB   float64 `json:"disk_total_mb"`
+	NetworkRxMB   float64 `json:"network_rx_mb"`
+	NetworkTxMB   float64 `json:"network_tx_mb"`
+	OpenFiles     int     `json:"open_files"`
+	Goroutines    int     `json:"goroutines"`
 }
 
 // FileEvent represents a filesystem change.
