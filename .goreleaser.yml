@@ -54,6 +54,16 @@ docker_manifests:
       - "ghcr.io/meshbrow-dev/meshbrow-agent:{{ .Version }}-amd64"
       - "ghcr.io/meshbrow-dev/meshbrow-agent:{{ .Version }}-arm64"
 
+brews:
+  - name: meshbrow-agent
+    repository:
+      owner: meshbrow-dev
+      name: homebrew-tap
+      token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
+    homepage: "https://meshbrow.dev"
+    description: "Browser session agent for the Meshbrow managed fleet"
+    license: "MIT"
+
 checksum:
   name_template: "checksums.txt"
 
