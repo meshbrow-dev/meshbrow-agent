@@ -1,0 +1,53 @@
+{
+  "name": "@meshbrow/agent",
+  "version": "0.1.0",
+  "description": "AI agent framework with built-in stealth browser capabilities powered by Meshbrow",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./tools": {
+      "types": "./dist/tools.d.ts",
+      "import": "./dist/tools.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/index.ts",
+    "lint": "eslint src/",
+    "test": "vitest run",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": ["meshbrow", "ai-agent", "browser", "automation", "stealth", "scraping", "playwright"],
+  "author": "Bytangle Ltd <hello@meshbrow.dev>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/meshbrow-dev/meshbrow-agent.git"
+  },
+  "homepage": "https://meshbrow.dev",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "@meshbrow/sdk": "^0.1.0",
+    "playwright-core": "^1.52.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0",
+    "vitest": "^2.1.0"
+  },
+  "peerDependencies": {
+    "openai": ">=4.0.0",
+    "@anthropic-ai/sdk": ">=0.30.0"
+  },
+  "peerDependenciesMeta": {
+    "openai": { "optional": true },
+    "@anthropic-ai/sdk": { "optional": true }
+  }
+}
